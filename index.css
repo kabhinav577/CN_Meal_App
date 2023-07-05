@@ -1,4 +1,40 @@
-h1 {
-    text-align: center;
-    color: rgb(190, 34, 34);
+/* Using Belanosima and Poppins Font  */
+@import url('https://fonts.googleapis.com/css2?family=Belanosima:wght@400;600;700&family=Poppins:wght@500;700&display=swap');
+
+/* font-family: 'Belanosima', sans-serif;
+font-family: 'Poppins', sans-serif; */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #262222;
+    color: white;
+}
+
+/* Navbar section  */
+button span i {
+    color: #262222;
+    font-size: 1.5rem;
+}
+
+/* Heading Section  */
+#heading {
+    margin-top: 4rem;
+}
+
+/* Header Serach bar  */
+#search-bar {
+    max-width: 600px;
+}
+
+#search-bar input {
+    height: 2.8rem;
+    border-radius: 20px;
+    padding: 0 20px !important;
+    font-size: 1.2rem;
 }
