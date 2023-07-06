@@ -22,6 +22,7 @@ function showMealList() {
   meals.then((data) => { 
     if (data.meals) {
       data.meals.forEach((ele) => {  // Iterate all element in meals Object
+        console.log(ele);
         let isFav = false;
         for (let i = 0; i < arr.length; i++) {
           if (arr[i] == ele.idMeal) {
@@ -63,7 +64,7 @@ function showMealList() {
            <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12 text-center">
-                    <span class="display-1 d-block">404</span>
+                    <span class="display-1 d-block">Not Found</span>
                     <div class="mb-4 lead">
                         The meal you are looking for was not found.
                     </div>
@@ -74,14 +75,14 @@ function showMealList() {
         `;
     }
 
-    document.getElementById("main-card").innerHTML = html;  // extract Main-card Id then upadte html
+    document.getElementById("main-card").innerHTML = html;  // extract Main-card Id from DOM then upadte html
   });
 }
 
-//it  shows full meal details in main-card Setcion
+//it shows full meal details in main-card Setcion
 async function showMealDetails(id) {
   let url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
-  let html = "";
+  let html = ``;
   await fetchMeals(url, id).then((data) => {
     html += `
           <div id="meal-details" class="mb-5">
@@ -110,16 +111,16 @@ async function showMealDetails(id) {
 
 // it shows all favourites meals in favourites body
 async function showFavMealList() {
-  let arr = JSON.parse(localStorage.getItem("favouritesList"));
+  let arr = JSON.parse(localStorage.getItem("favouritesList")); // create array and fetch data from localStorage
   let url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
-  let html = "";
+  let html = ``;
   if (arr.length == 0) {
     html += `
             <div class="page-wrap d-flex flex-row align-items-center">
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-md-12 text-center">
-                            <span class="display-1 d-block">404</span>
+                            <span class="display-1 d-block">Not Found</span>
                             <div class="mb-4 lead">
                                 No meal added in your favourites list.
                             </div>
@@ -149,16 +150,16 @@ async function showFavMealList() {
   document.getElementById("favourites-body").innerHTML = html;
 }
 
-// This function for add meal to favourite List
+// This function for add meal to our favourite List
 function addRemoveToFavList(id) {
   let arr = JSON.parse(localStorage.getItem("favouritesList"));
   let contain = false;
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i++) { // mapping through localStorage array when find then conatin = true
     if (id == arr[i]) {
       contain = true;
     }
   }
-  if (contain) {
+  if (contain) {  // if contain is true then remove from Favourite List otherwise push to array
     let number = arr.indexOf(id);
     arr.splice(number, 1);
     alert("Your meal removed from your favourites list");
@@ -166,7 +167,7 @@ function addRemoveToFavList(id) {
     arr.push(id);
     alert("Your meal add your favourites list");
   }
-  localStorage.setItem("favouritesList", JSON.stringify(arr));
+  localStorage.setItem("favouritesList", JSON.stringify(arr)); // seting the localStorage when removed or add work is done
   showMealList();
   showFavMealList();
 }
